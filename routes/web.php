@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +13,22 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+/*
+Web Routes 
+
+Register web routes for your app's RouteServiceProvider 
+in a group containing the "web" middleware
+*/
+
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
+
+Auth::routes();
+
+
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+Route::get('/roles', 'RolesController@index')->name('roles.index');
+Route::post('/roles', 'RolesController@store')->name('roles.store');
