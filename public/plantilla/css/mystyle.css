@@ -1,0 +1,10 @@
+.btn-success-delete{
+ 
+    text-decoration: none;
+    color: #fff;
+    background-color: green;
+    text-align: center;
+    letter-spacing: .5px;
+    transition: .2s ease-out;
+    cursor: pointer;
+}

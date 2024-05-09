@@ -32,3 +32,4 @@ Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 Route::get('/roles', 'RolesController@index')->name('roles.index');
 Route::post('/roles', 'RolesController@store')->name('roles.store');
+Route::post('/roles/delete', 'RolesController@destroy')->name('roles.destroy');

@@ -36,12 +36,54 @@ class RolesController extends Controller
         if ($request->ajax()) {
             
 
+            $rol_id = $request->input("rol_id");
             $nombreRol = $request->input("nombreRol");
             $descripcionRol = $request->input('descripcionRol');
+            $usuario_at = $request->input('usuario_at');
                        
 
-            $grupo = DB::statement('call procAgregarRol(?, ?)',[$nombreRol, $descripcionRol]);
-            
+            $rol = Roles::where('nombreRol', $nombreRol)->whereNull('deleted_at')->first();
+
+            if($rol_id == null){
+                $guardar = DB::statement('call procAgregarRol(?, ?, ?)',[$nombreRol, $descripcionRol, $usuario_at]);
+
+                if($rol != ""){
+                    return response()->json([
+                        "res" => false,
+                        "exist" => true
+                    ]);
+                }else{
+                    return response()->json([
+                        "res" => true,
+                        "exist" => false
+                    ]);
+                }
+                
+
+            }else{
+                $editar = DB::statement('call procActualizarRol(?, ?, ?, ?)',[$rol_id, $nombreRol, $descripcionRol, $usuario_at]);
+
+                if($rol != ""){
+                    if($rol->id == $rol_id){
+                        return response()->json([
+                            "res" => "update",
+                            "exist" => false
+                        ]);
+                    }else{
+                        return response()->json([
+                            "res" => false,
+                            "exist" => true
+                        ]);
+                    }
+                }else{
+                    return response()->json([
+                        "res" => "update",
+                        "exist" => false
+                    ]);
+                }
+                
+                
+            }                     
                     
         }
     }
@@ -53,28 +95,24 @@ class RolesController extends Controller
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+   
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            
+
+            $rol_id = $request->input('rol_id');
+            $rol = Roles::find($rol_id);
+            $rol->delete();
+
+            return response()->json(
+                ["res" => "delete"]
+            );                  
+                    
+        }   
     }
 }

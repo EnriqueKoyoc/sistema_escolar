@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <!--================================================================================
 	Item Name: Materialize - Material Design Admin Template
 	Version: 4.0
@@ -8,12 +8,13 @@
   ================================================================================ -->
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="msapplication-tap-highlight" content="no">
-    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
+    <meta name="description" content="Google. ">
     <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
-    <title>Materialize - Material Design Admin Template</title>
+    <title>Sistema Escolar</title>
     <!-- Favicons-->
     <link href="{{ asset('plantilla/images/favicon/favicon-32x32.png') }}" rel="icon" sizes="32x32">
     <!-- Favicons-->
@@ -25,6 +26,7 @@
     <!-- CORE CSS-->
     <link href="{{ asset('plantilla/css//materialize.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ asset('plantilla/css//style.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ asset('plantilla/css//mystyle.css') }}" type="text/css" rel="stylesheet">
     <!-- Custome CSS-->
     <link href="{{ asset('plantilla/css/custom/custom.css') }}" type="text/css" rel="stylesheet">
     <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
@@ -35,7 +37,8 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="{{ asset('datatables/dataTables.js') }}"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('sweetalert2/sweetalert2.js') }}"></script>
+
   </head>
   <body>
     <!-- Start Page Loading -->
@@ -629,7 +632,11 @@
       // Or with jQuery
     
       $(document).ready(function(){
-        $('.modal').modal();
+        $('.modal').modal({
+          dismissible: false
+        });
+
+        
       });
     </script>
     
